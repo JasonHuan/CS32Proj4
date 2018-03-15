@@ -26,6 +26,24 @@ public:
       // C++11 syntax for preventing copying and assignment
     MyHash(const MyHash&) = delete;
     MyHash& operator=(const MyHash&) = delete;
-
 private:
+    double m_maxLoadFactor;
+    struct Node{
+        Node(KeyType Key, ValueType Value){
+            m_key = Key;
+            m_value = Value;
+        }
+        
+        ~Node(){ //either i'm a genius or i'm an idiot
+            if(m_next != nullptr)
+                delete m_next;
+        }
+        
+        KeyType m_key;
+        ValueType m_value;
+        Node* m_next;
+    };
+    Node* m_array;
+    int m_count;
+    double m_capacity;
 };
